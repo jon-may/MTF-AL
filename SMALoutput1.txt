@@ -1,0 +1,764 @@
+library("lavaan")
+library("semTools")
+
+SMAL <- read.csv("C:/TEMP/SMAL.csv")
+
+sink('C:/TEMP/SMALoutput.txt',split=TRUE)
+
+SMAL.model3 <- 'intensity =~ WANT + NEED + URGE 
+               imagery =~ GOOD + BETTER + WORSE + DOING + HOW + SUCCEED + PAST
+               availability =~ REMIND + GRAB + KEEP'
+fit <- cfa(SMAL.model3, data=SMAL, estimator="MLR") 
+summary(fit, fit.measures=TRUE, modindices=TRUE)
+reliability(fit)
+
+sink()
+
+lavaan (0.5-23.1097) converged normally after  67 iterations
+
+  Number of observations                           399
+
+  Estimator                                         ML      Robust
+  Minimum Function Test Statistic              655.650     505.158
+  Degrees of freedom                                62          62
+  P-value (Chi-square)                           0.000       0.000
+  Scaling correction factor                                  1.298
+    for the Yuan-Bentler correction
+
+Model test baseline model:
+
+  Minimum Function Test Statistic             5220.136    3518.989
+  Degrees of freedom                                78          78
+  P-value                                        0.000       0.000
+
+User model versus baseline model:
+
+  Comparative Fit Index (CFI)                    0.885       0.871
+  Tucker-Lewis Index (TLI)                       0.855       0.838
+
+  Robust Comparative Fit Index (CFI)                         0.887
+  Robust Tucker-Lewis Index (TLI)                            0.858
+
+Loglikelihood and Information Criteria:
+
+  Loglikelihood user model (H0)             -10917.354  -10917.354
+  Scaling correction factor                                  1.318
+    for the MLR correction
+  Loglikelihood unrestricted model (H1)     -10589.529  -10589.529
+  Scaling correction factor                                  1.306
+    for the MLR correction
+
+  Number of free parameters                         42          42
+  Akaike (AIC)                               21918.708   21918.708
+  Bayesian (BIC)                             22086.245   22086.245
+  Sample-size adjusted Bayesian (BIC)        21952.976   21952.976
+
+Root Mean Square Error of Approximation:
+
+  RMSEA                                          0.155       0.134
+  90 Percent Confidence Interval          0.144  0.166       0.124  0.143
+  P-value RMSEA <= 0.05                          0.000       0.000
+
+  Robust RMSEA                                               0.152
+  90 Percent Confidence Interval                             0.140  0.165
+
+Standardized Root Mean Square Residual:
+
+  SRMR                                           0.088       0.088
+
+Parameter Estimates:
+
+  Information                                 Observed
+  Standard Errors                   Robust.huber.white
+
+Latent Variables:
+                   Estimate  Std.Err  z-value  P(>|z|)
+  intensity =~                                        
+    WANT              1.000                           
+    NEED              1.015    0.029   35.190    0.000
+    URGE              0.958    0.026   37.229    0.000
+  imagery =~                                          
+    GOOD              1.000                           
+    BETTER            0.982    0.025   39.849    0.000
+    WORSE             0.768    0.042   18.198    0.000
+    DOING             0.936    0.052   18.136    0.000
+    HOW               0.915    0.052   17.605    0.000
+    SUCCEED           0.910    0.055   16.590    0.000
+    PAST              0.743    0.050   14.846    0.000
+  availability =~                                     
+    REMIND            1.000                           
+    GRAB              1.018    0.029   34.537    0.000
+    KEEP              0.751    0.049   15.414    0.000
+
+Covariances:
+                   Estimate  Std.Err  z-value  P(>|z|)
+  intensity ~~                                        
+    imagery           6.060    0.481   12.610    0.000
+    availability      5.249    0.412   12.730    0.000
+  imagery ~~                                          
+    availability      4.509    0.455    9.915    0.000
+
+Intercepts:
+                   Estimate  Std.Err  z-value  P(>|z|)
+   .WANT              4.241    0.147   28.753    0.000
+   .NEED              4.115    0.156   26.427    0.000
+   .URGE              3.664    0.141   26.028    0.000
+   .GOOD              5.361    0.159   33.728    0.000
+   .BETTER            5.461    0.163   33.562    0.000
+   .WORSE             4.351    0.152   28.614    0.000
+   .DOING             5.358    0.162   33.149    0.000
+   .HOW               5.654    0.159   35.598    0.000
+   .SUCCEED           5.709    0.169   33.807    0.000
+   .PAST              4.955    0.168   29.481    0.000
+   .REMIND            3.564    0.143   24.867    0.000
+   .GRAB              3.386    0.138   24.557    0.000
+   .KEEP              4.406    0.154   28.639    0.000
+    intensity         0.000                           
+    imagery           0.000                           
+    availability      0.000                           
+
+Variances:
+                   Estimate  Std.Err  z-value  P(>|z|)
+   .WANT              1.010    0.167    6.066    0.000
+   .NEED              1.775    0.217    8.172    0.000
+   .URGE              0.872    0.130    6.726    0.000
+   .GOOD              1.729    0.312    5.550    0.000
+   .BETTER            2.510    0.416    6.038    0.000
+   .WORSE             4.301    0.494    8.701    0.000
+   .DOING             3.102    0.562    5.523    0.000
+   .HOW               3.073    0.536    5.728    0.000
+   .SUCCEED           4.456    0.622    7.165    0.000
+   .PAST              6.658    0.556   11.965    0.000
+   .REMIND            1.307    0.210    6.227    0.000
+   .GRAB              0.449    0.141    3.186    0.001
+   .KEEP              5.561    0.626    8.888    0.000
+    intensity         7.669    0.477   16.090    0.000
+    imagery           8.351    0.550   15.172    0.000
+    availability      6.889    0.531   12.963    0.000
+
+Modification Indices:
+
+             lhs op     rhs      mi mi.scaled    epc sepc.lv sepc.all sepc.nox
+49     intensity =~    GOOD   6.116     4.712  0.122   0.338    0.107    0.107
+50     intensity =~  BETTER  25.031    19.286  0.275   0.761    0.234    0.234
+51     intensity =~   WORSE  18.731    14.431  0.284   0.787    0.259    0.259
+52     intensity =~   DOING   7.145     5.505 -0.157  -0.434   -0.135   -0.135
+53     intensity =~     HOW  30.945    23.842 -0.324  -0.897   -0.283   -0.283
+54     intensity =~ SUCCEED  18.966    14.613 -0.296  -0.819   -0.243   -0.243
+55     intensity =~    PAST   0.033     0.025 -0.015  -0.040   -0.012   -0.012
+56     intensity =~  REMIND   4.288     3.303 -0.110  -0.305   -0.106   -0.106
+57     intensity =~    GRAB   2.462     1.897 -0.086  -0.239   -0.087   -0.087
+58     intensity =~    KEEP  38.218    29.446  0.422   1.168    0.380    0.380
+59       imagery =~    WANT  11.203     8.631  0.133   0.384    0.130    0.130
+60       imagery =~    NEED   8.693     6.698 -0.134  -0.386   -0.124   -0.124
+61       imagery =~    URGE   0.520     0.401 -0.027  -0.079   -0.028   -0.028
+62       imagery =~  REMIND   1.339     1.032 -0.041  -0.118   -0.041   -0.041
+63       imagery =~    GRAB  10.985     8.463 -0.117  -0.337   -0.123   -0.123
+64       imagery =~    KEEP  88.918    68.508  0.520   1.502    0.489    0.489
+65  availability =~    WANT   3.894     3.000 -0.078  -0.206   -0.070   -0.070
+66  availability =~    NEED  11.350     8.745  0.154   0.404    0.130    0.130
+67  availability =~    URGE   0.985     0.759 -0.037  -0.098   -0.035   -0.035
+68  availability =~    GOOD   4.628     3.566  0.086   0.225    0.071    0.071
+69  availability =~  BETTER   7.692     5.926  0.124   0.325    0.100    0.100
+70  availability =~   WORSE  22.257    17.148  0.254   0.666    0.219    0.219
+71  availability =~   DOING   7.527     5.799 -0.131  -0.345   -0.107   -0.107
+72  availability =~     HOW  17.420    13.422 -0.198  -0.520   -0.164   -0.164
+73  availability =~ SUCCEED  22.243    17.138 -0.262  -0.688   -0.204   -0.204
+74  availability =~    PAST   6.565     5.058  0.169   0.443    0.132    0.132
+75          WANT ~~    NEED   1.523     1.174 -0.184  -0.184   -0.020   -0.020
+76          WANT ~~    URGE   0.006     0.005  0.012   0.012    0.001    0.001
+77          WANT ~~    GOOD   0.616     0.475  0.074   0.074    0.008    0.008
+78          WANT ~~  BETTER   4.385     3.379 -0.225  -0.225   -0.024   -0.024
+79          WANT ~~   WORSE   2.259     1.741 -0.198  -0.198   -0.022   -0.022
+80          WANT ~~   DOING   6.269     4.830  0.291   0.291    0.031    0.031
+81          WANT ~~     HOW   6.035     4.650  0.283   0.283    0.030    0.030
+82          WANT ~~ SUCCEED   0.226     0.174 -0.064  -0.064   -0.006   -0.006
+83          WANT ~~    PAST   3.504     2.700  0.303   0.303    0.031    0.031
+84          WANT ~~  REMIND   3.645     2.808 -0.154  -0.154   -0.018   -0.018
+85          WANT ~~    GRAB   0.564     0.435 -0.055  -0.055   -0.007   -0.007
+86          WANT ~~    KEEP  10.279     7.920  0.472   0.472    0.052    0.052
+87          NEED ~~    URGE   1.368     1.054  0.168   0.168    0.019    0.019
+88          NEED ~~    GOOD   1.452     1.119 -0.137  -0.137   -0.014   -0.014
+89          NEED ~~  BETTER  10.753     8.285  0.425   0.425    0.042    0.042
+90          NEED ~~   WORSE  15.495    11.939  0.626   0.626    0.066    0.066
+91          NEED ~~   DOING   7.362     5.672 -0.381  -0.381   -0.038   -0.038
+92          NEED ~~     HOW   7.647     5.892 -0.385  -0.385   -0.039   -0.039
+93          NEED ~~ SUCCEED   5.817     4.482 -0.395  -0.395   -0.038   -0.038
+94          NEED ~~    PAST   1.301     1.002 -0.223  -0.223   -0.021   -0.021
+95          NEED ~~  REMIND   1.357     1.045  0.113   0.113    0.013    0.013
+96          NEED ~~    GRAB   3.176     2.447  0.155   0.155    0.018    0.018
+97          NEED ~~    KEEP   3.817     2.941 -0.347  -0.347   -0.036   -0.036
+98          URGE ~~    GOOD   1.544     1.190  0.111   0.111    0.012    0.012
+99          URGE ~~  BETTER   4.648     3.581  0.219   0.219    0.024    0.024
+100         URGE ~~   WORSE   0.098     0.075 -0.039  -0.039   -0.005   -0.005
+101         URGE ~~   DOING   1.394     1.074 -0.129  -0.129   -0.014   -0.014
+102         URGE ~~     HOW   7.925     6.106 -0.306  -0.306   -0.034   -0.034
+103         URGE ~~ SUCCEED   0.973     0.750  0.126   0.126    0.013    0.013
+104         URGE ~~    PAST   4.835     3.725 -0.335  -0.335   -0.036   -0.036
+105         URGE ~~  REMIND   0.022     0.017  0.011   0.011    0.001    0.001
+106         URGE ~~    GRAB   0.057     0.044 -0.016  -0.016   -0.002   -0.002
+107         URGE ~~    KEEP   1.192     0.919 -0.152  -0.152   -0.018   -0.018
+108         GOOD ~~  BETTER  94.698    72.962  1.544   1.544    0.150    0.150
+109         GOOD ~~   WORSE   1.200     0.925  0.191   0.191    0.020    0.020
+110         GOOD ~~   DOING  34.376    26.486 -0.960  -0.960   -0.094   -0.094
+111         GOOD ~~     HOW   6.289     4.845 -0.406  -0.406   -0.040   -0.040
+112         GOOD ~~ SUCCEED  28.462    21.929 -0.979  -0.979   -0.091   -0.091
+113         GOOD ~~    PAST   0.585     0.451 -0.161  -0.161   -0.015   -0.015
+114         GOOD ~~  REMIND   1.112     0.856  0.105   0.105    0.012    0.012
+115         GOOD ~~    GRAB   0.151     0.116  0.035   0.035    0.004    0.004
+116         GOOD ~~    KEEP   3.580     2.758 -0.347  -0.347   -0.036   -0.036
+117       BETTER ~~   WORSE  36.463    28.094  1.173   1.173    0.119    0.119
+118       BETTER ~~   DOING  61.865    47.665 -1.402  -1.402   -0.134   -0.134
+119       BETTER ~~     HOW  59.740    46.028 -1.364  -1.364   -0.132   -0.132
+120       BETTER ~~ SUCCEED  10.889     8.389 -0.669  -0.669   -0.061   -0.061
+121       BETTER ~~    PAST   8.901     6.858 -0.702  -0.702   -0.064   -0.064
+122       BETTER ~~  REMIND   0.313     0.241  0.063   0.063    0.007    0.007
+123       BETTER ~~    GRAB   0.222     0.171  0.048   0.048    0.005    0.005
+124       BETTER ~~    KEEP   4.339     3.343 -0.435  -0.435   -0.044   -0.044
+125        WORSE ~~   DOING  11.791     9.085 -0.714  -0.714   -0.073   -0.073
+126        WORSE ~~     HOW  41.697    32.126 -1.331  -1.331   -0.138   -0.138
+127        WORSE ~~ SUCCEED   6.572     5.064 -0.617  -0.617   -0.060   -0.060
+128        WORSE ~~    PAST   0.125     0.096  0.101   0.101    0.010    0.010
+129        WORSE ~~  REMIND   0.421     0.324  0.090   0.090    0.010    0.010
+130        WORSE ~~    GRAB   1.124     0.866  0.132   0.132    0.016    0.016
+131        WORSE ~~    KEEP   0.203     0.156  0.116   0.116    0.012    0.012
+132        DOING ~~     HOW 182.576   140.669  2.522   2.522    0.246    0.246
+133        DOING ~~ SUCCEED  62.914    48.474  1.714   1.714    0.157    0.157
+134        DOING ~~    PAST   1.170     0.902  0.274   0.274    0.025    0.025
+135        DOING ~~  REMIND   6.860     5.285 -0.321  -0.321   -0.035   -0.035
+136        DOING ~~    GRAB   0.080     0.062 -0.031  -0.031   -0.003   -0.003
+137        DOING ~~    KEEP  20.122    15.503  1.014   1.014    0.102    0.102
+138          HOW ~~ SUCCEED  54.645    42.102  1.583   1.583    0.148    0.148
+139          HOW ~~    PAST   3.457     2.663  0.466   0.466    0.044    0.044
+140          HOW ~~  REMIND   1.971     1.519 -0.171  -0.171   -0.019   -0.019
+141          HOW ~~    GRAB   0.885     0.682 -0.102  -0.102   -0.012   -0.012
+142          HOW ~~    KEEP  11.029     8.498  0.745   0.745    0.076    0.076
+143      SUCCEED ~~    PAST   1.343     1.034  0.340   0.340    0.030    0.030
+144      SUCCEED ~~  REMIND   0.118     0.091 -0.049  -0.049   -0.005   -0.005
+145      SUCCEED ~~    GRAB  10.038     7.734 -0.406  -0.406   -0.044   -0.044
+146      SUCCEED ~~    KEEP  22.383    17.245  1.251   1.251    0.121    0.121
+147         PAST ~~  REMIND   8.059     6.210  0.484   0.484    0.050    0.050
+148         PAST ~~    GRAB   0.522     0.402 -0.110  -0.110   -0.012   -0.012
+149         PAST ~~    KEEP   0.048     0.037  0.069   0.069    0.007    0.007
+150       REMIND ~~    GRAB  50.965    39.267  3.123   3.123    0.396    0.396
+151       REMIND ~~    KEEP   4.687     3.611 -0.420  -0.420   -0.048   -0.048
+152         GRAB ~~    KEEP   4.386     3.380 -0.407  -0.407   -0.048   -0.048
+       intensity   imagery availability     total
+alpha  0.9484531 0.9259652    0.8654295 0.9468947
+omega  0.9488056 0.9267480    0.8782951 0.9613478
+omega2 0.9488056 0.9267480    0.8782951 0.9613478
+omega3 0.9489238 0.9233743    0.8855582 0.9259546
+avevar 0.8607529 0.6462440    0.7099342 0.7043977
+
+SMAL.model4 <- 'intensity =~ WANT + NEED + URGE
+               imageryi =~ GOOD + BETTER + WORSE 
+               imageryse =~ DOING + HOW + SUCCEED + PAST
+              availability =~ REMIND + GRAB + KEEP'
+fit <- cfa(SMAL.model4, data=SMAL, estimator="MLR") 
+summary(fit, fit.measures=TRUE, modindices=TRUE)
+reliability(fit)
+
+
+lavaan (0.5-23.1097) converged normally after  88 iterations
+
+  Number of observations                           399
+
+  Estimator                                         ML      Robust
+  Minimum Function Test Statistic              316.966     246.454
+  Degrees of freedom                                59          59
+  P-value (Chi-square)                           0.000       0.000
+  Scaling correction factor                                  1.286
+    for the Yuan-Bentler correction
+
+Model test baseline model:
+
+  Minimum Function Test Statistic             5220.136    3518.989
+  Degrees of freedom                                78          78
+  P-value                                        0.000       0.000
+
+User model versus baseline model:
+
+  Comparative Fit Index (CFI)                    0.950       0.946
+  Tucker-Lewis Index (TLI)                       0.934       0.928
+
+  Robust Comparative Fit Index (CFI)                         0.953
+  Robust Tucker-Lewis Index (TLI)                            0.938
+
+Loglikelihood and Information Criteria:
+
+  Loglikelihood user model (H0)             -10748.012  -10748.012
+  Scaling correction factor                                  1.332
+    for the MLR correction
+  Loglikelihood unrestricted model (H1)     -10589.529  -10589.529
+  Scaling correction factor                                  1.306
+    for the MLR correction
+
+  Number of free parameters                         45          45
+  Akaike (AIC)                               21586.024   21586.024
+  Bayesian (BIC)                             21765.527   21765.527
+  Sample-size adjusted Bayesian (BIC)        21622.740   21622.740
+
+Root Mean Square Error of Approximation:
+
+  RMSEA                                          0.105       0.089
+  90 Percent Confidence Interval          0.094  0.116       0.079  0.100
+  P-value RMSEA <= 0.05                          0.000       0.000
+
+  Robust RMSEA                                               0.101
+  90 Percent Confidence Interval                             0.088  0.114
+
+Standardized Root Mean Square Residual:
+
+  SRMR                                           0.083       0.083
+
+Parameter Estimates:
+
+  Information                                 Observed
+  Standard Errors                   Robust.huber.white
+
+Latent Variables:
+                   Estimate  Std.Err  z-value  P(>|z|)
+  intensity =~                                        
+    WANT              1.000                           
+    NEED              1.018    0.029   35.223    0.000
+    URGE              0.961    0.026   37.401    0.000
+  imageryi =~                                         
+    GOOD              1.000                           
+    BETTER            1.011    0.025   41.243    0.000
+    WORSE             0.779    0.042   18.497    0.000
+  imageryse =~                                        
+    DOING             1.000                           
+    HOW               0.980    0.020   49.597    0.000
+    SUCCEED           0.934    0.033   28.498    0.000
+    PAST              0.696    0.050   13.971    0.000
+  availability =~                                     
+    REMIND            1.000                           
+    GRAB              1.018    0.029   34.708    0.000
+    KEEP              0.749    0.049   15.383    0.000
+
+Covariances:
+                   Estimate  Std.Err  z-value  P(>|z|)
+  intensity ~~                                        
+    imageryi          6.437    0.433   14.852    0.000
+    imageryse         5.113    0.449   11.376    0.000
+    availability      5.242    0.412   12.732    0.000
+  imageryi ~~                                         
+    imageryse         7.195    0.493   14.598    0.000
+    availability      4.858    0.420   11.559    0.000
+  imageryse ~~                                        
+    availability      3.677    0.422    8.715    0.000
+
+Intercepts:
+                   Estimate  Std.Err  z-value  P(>|z|)
+   .WANT              4.241    0.147   28.753    0.000
+   .NEED              4.115    0.156   26.427    0.000
+   .URGE              3.664    0.141   26.028    0.000
+   .GOOD              5.361    0.159   33.728    0.000
+   .BETTER            5.461    0.163   33.562    0.000
+   .WORSE             4.351    0.152   28.614    0.000
+   .DOING             5.358    0.162   33.149    0.000
+   .HOW               5.654    0.159   35.598    0.000
+   .SUCCEED           5.709    0.169   33.807    0.000
+   .PAST              4.955    0.168   29.481    0.000
+   .REMIND            3.564    0.143   24.867    0.000
+   .GRAB              3.386    0.138   24.557    0.000
+   .KEEP              4.406    0.154   28.639    0.000
+    intensity         0.000                           
+    imageryi          0.000                           
+    imageryse         0.000                           
+    availability      0.000                           
+
+Variances:
+                   Estimate  Std.Err  z-value  P(>|z|)
+   .WANT              1.039    0.168    6.168    0.000
+   .NEED              1.756    0.214    8.218    0.000
+   .URGE              0.858    0.128    6.724    0.000
+   .GOOD              1.336    0.224    5.972    0.000
+   .BETTER            1.621    0.241    6.721    0.000
+   .WORSE             3.914    0.439    8.913    0.000
+   .DOING             1.431    0.246    5.821    0.000
+   .HOW               1.436    0.247    5.817    0.000
+   .SUCCEED           3.530    0.472    7.472    0.000
+   .PAST              6.913    0.588   11.766    0.000
+   .REMIND            1.304    0.210    6.222    0.000
+   .GRAB              0.448    0.139    3.218    0.001
+   .KEEP              5.575    0.625    8.913    0.000
+    intensity         7.640    0.479   15.940    0.000
+    imageryi          8.744    0.513   17.061    0.000
+    imageryse         8.994    0.527   17.053    0.000
+    availability      6.892    0.531   12.972    0.000
+
+Modification Indices:
+
+             lhs op     rhs     mi mi.scaled    epc sepc.lv sepc.all sepc.nox
+54     intensity =~    GOOD  6.422     4.994 -0.152  -0.421   -0.133   -0.133
+55     intensity =~  BETTER  0.635     0.494  0.049   0.135    0.042    0.042
+56     intensity =~   WORSE  6.653     5.173  0.179   0.494    0.163    0.163
+57     intensity =~   DOING  2.497     1.941  0.063   0.175    0.054    0.054
+58     intensity =~     HOW  8.107     6.304 -0.112  -0.311   -0.098   -0.098
+59     intensity =~ SUCCEED  0.032     0.025 -0.009  -0.025   -0.007   -0.007
+60     intensity =~    PAST 10.575     8.222  0.213   0.589    0.175    0.175
+61     intensity =~  REMIND  4.122     3.205 -0.108  -0.298   -0.104   -0.104
+62     intensity =~    GRAB  2.377     1.848 -0.085  -0.234   -0.085   -0.085
+63     intensity =~    KEEP 37.249    28.963  0.418   1.154    0.376    0.376
+64      imageryi =~    WANT  5.626     4.375  0.100   0.297    0.101    0.101
+65      imageryi =~    NEED  4.572     3.555 -0.102  -0.302   -0.097   -0.097
+66      imageryi =~    URGE  0.192     0.149 -0.018  -0.052   -0.019   -0.019
+67      imageryi =~   DOING  1.839     1.430 -0.082  -0.241   -0.075   -0.075
+68      imageryi =~     HOW  2.607     2.027 -0.095  -0.282   -0.089   -0.089
+69      imageryi =~ SUCCEED  1.890     1.470  0.096   0.283    0.084    0.084
+70      imageryi =~    PAST 15.879    12.347  0.358   1.058    0.315    0.315
+71      imageryi =~  REMIND  0.941     0.732 -0.036  -0.106   -0.037   -0.037
+72      imageryi =~    GRAB  9.431     7.333 -0.113  -0.334   -0.121   -0.121
+73      imageryi =~    KEEP 69.097    53.725  0.465   1.376    0.448    0.448
+74     imageryse =~    WANT 17.488    13.598  0.125   0.374    0.127    0.127
+75     imageryse =~    NEED 12.485     9.708 -0.122  -0.365   -0.117   -0.117
+76     imageryse =~    URGE  1.105     0.859 -0.030  -0.089   -0.032   -0.032
+77     imageryse =~    GOOD 26.057    20.260  0.311   0.934    0.294    0.294
+78     imageryse =~  BETTER 16.331    12.698 -0.251  -0.754   -0.232   -0.232
+79     imageryse =~   WORSE  2.589     2.013 -0.112  -0.336   -0.111   -0.111
+80     imageryse =~  REMIND  2.371     1.844 -0.043  -0.130   -0.045   -0.045
+81     imageryse =~    GRAB  7.214     5.609 -0.074  -0.223   -0.081   -0.081
+82     imageryse =~    KEEP 94.918    73.802  0.463   1.389    0.452    0.452
+83  availability =~    WANT  3.396     2.640 -0.073  -0.192   -0.065   -0.065
+84  availability =~    NEED 11.112     8.640  0.152   0.398    0.128    0.128
+85  availability =~    URGE  1.225     0.952 -0.042  -0.109   -0.039   -0.039
+86  availability =~    GOOD  1.862     1.448 -0.060  -0.157   -0.049   -0.049
+87  availability =~  BETTER  0.719     0.559 -0.038  -0.100   -0.031   -0.031
+88  availability =~   WORSE 12.211     9.494  0.190   0.498    0.164    0.164
+89  availability =~   DOING  0.581     0.452  0.027   0.072    0.022    0.022
+90  availability =~     HOW  2.918     2.269 -0.060  -0.158   -0.050   -0.050
+91  availability =~ SUCCEED  2.344     1.822 -0.070  -0.184   -0.054   -0.054
+92  availability =~    PAST 24.593    19.122  0.298   0.783    0.233    0.233
+93          WANT ~~    NEED  1.051     0.817 -0.149  -0.149   -0.016   -0.016
+94          WANT ~~    URGE  0.254     0.198  0.075   0.075    0.009    0.009
+95          WANT ~~    GOOD  5.009     3.895  0.204   0.204    0.022    0.022
+96          WANT ~~  BETTER  5.106     3.970 -0.217  -0.217   -0.023   -0.023
+97          WANT ~~   WORSE  1.306     1.015 -0.146  -0.146   -0.016   -0.016
+98          WANT ~~   DOING  3.122     2.428  0.163   0.163    0.017    0.017
+99          WANT ~~     HOW  2.533     1.969  0.145   0.145    0.016    0.016
+100         WANT ~~ SUCCEED  3.013     2.343 -0.215  -0.215   -0.022   -0.022
+101         WANT ~~    PAST  1.828     1.421  0.223   0.223    0.023    0.023
+102         WANT ~~  REMIND  3.551     2.761 -0.152  -0.152   -0.018   -0.018
+103         WANT ~~    GRAB  0.372     0.289 -0.044  -0.044   -0.005   -0.005
+104         WANT ~~    KEEP 11.510     8.949  0.502   0.502    0.055    0.055
+105         NEED ~~    URGE  0.321     0.250  0.080   0.080    0.009    0.009
+106         NEED ~~    GOOD 15.389    11.966 -0.425  -0.425   -0.043   -0.043
+107         NEED ~~  BETTER  4.876     3.791  0.252   0.252    0.025    0.025
+108         NEED ~~   WORSE 10.704     8.323  0.498   0.498    0.053    0.053
+109         NEED ~~   DOING  0.377     0.293 -0.068  -0.068   -0.007   -0.007
+110         NEED ~~     HOW  0.653     0.508 -0.088  -0.088   -0.009   -0.009
+111         NEED ~~ SUCCEED  0.742     0.577 -0.128  -0.128   -0.012   -0.012
+112         NEED ~~    PAST  0.067     0.052 -0.051  -0.051   -0.005   -0.005
+113         NEED ~~  REMIND  1.173     0.912  0.104   0.104    0.012    0.012
+114         NEED ~~    GRAB  2.780     2.161  0.144   0.144    0.017    0.017
+115         NEED ~~    KEEP  3.332     2.591 -0.323  -0.323   -0.034   -0.034
+116         URGE ~~    GOOD  0.001     0.001 -0.002  -0.002    0.000    0.000
+117         URGE ~~  BETTER  1.354     1.053  0.105   0.105    0.011    0.011
+118         URGE ~~   WORSE  0.947     0.736 -0.116  -0.116   -0.014   -0.014
+119         URGE ~~   DOING  0.265     0.206  0.044   0.044    0.005    0.005
+120         URGE ~~     HOW  5.788     4.501 -0.205  -0.205   -0.023   -0.023
+121         URGE ~~ SUCCEED  5.562     4.325  0.274   0.274    0.029    0.029
+122         URGE ~~    PAST  2.476     1.925 -0.243  -0.243   -0.026   -0.026
+123         URGE ~~  REMIND  0.002     0.002  0.004   0.004    0.000    0.000
+124         URGE ~~    GRAB  0.119     0.092 -0.024  -0.024   -0.003   -0.003
+125         URGE ~~    KEEP  0.784     0.610 -0.123  -0.123   -0.014   -0.014
+126         GOOD ~~  BETTER  1.420     1.104  0.304   0.304    0.030    0.030
+127         GOOD ~~   WORSE 14.884    11.573 -0.684  -0.684   -0.071   -0.071
+128         GOOD ~~   DOING  1.664     1.294 -0.145  -0.145   -0.014   -0.014
+129         GOOD ~~     HOW 23.914    18.594  0.543   0.543    0.054    0.054
+130         GOOD ~~ SUCCEED  2.087     1.623 -0.213  -0.213   -0.020   -0.020
+131         GOOD ~~    PAST  1.193     0.928  0.213   0.213    0.020    0.020
+132         GOOD ~~  REMIND  0.383     0.298  0.059   0.059    0.006    0.006
+133         GOOD ~~    GRAB  0.628     0.488 -0.068  -0.068   -0.008   -0.008
+134         GOOD ~~    KEEP  0.326     0.254  0.100   0.100    0.010    0.010
+135       BETTER ~~   WORSE  7.990     6.213  0.515   0.515    0.052    0.052
+136       BETTER ~~   DOING  5.058     3.933 -0.265  -0.265   -0.025   -0.025
+137       BETTER ~~     HOW  4.906     3.815 -0.258  -0.258   -0.025   -0.025
+138       BETTER ~~ SUCCEED  9.438     7.338  0.477   0.477    0.044    0.044
+139       BETTER ~~    PAST  0.475     0.370 -0.142  -0.142   -0.013   -0.013
+140       BETTER ~~  REMIND  0.012     0.009  0.011   0.011    0.001    0.001
+141       BETTER ~~    GRAB  0.388     0.301 -0.056  -0.056   -0.006   -0.006
+142       BETTER ~~    KEEP  0.798     0.620 -0.164  -0.164   -0.016   -0.016
+143        WORSE ~~   DOING  2.222     1.728  0.230   0.230    0.023    0.023
+144        WORSE ~~     HOW 15.470    12.029 -0.600  -0.600   -0.062   -0.062
+145        WORSE ~~ SUCCEED  0.975     0.758  0.205   0.205    0.020    0.020
+146        WORSE ~~    PAST  4.326     3.364  0.574   0.574    0.056    0.056
+147        WORSE ~~  REMIND  0.178     0.139  0.056   0.056    0.006    0.006
+148        WORSE ~~    GRAB  0.398     0.309  0.075   0.075    0.009    0.009
+149        WORSE ~~    KEEP  2.071     1.610  0.355   0.355    0.038    0.038
+150        DOING ~~     HOW 11.382     8.850  0.774   0.774    0.076    0.076
+151        DOING ~~ SUCCEED  0.026     0.020 -0.033  -0.033   -0.003   -0.003
+152        DOING ~~    PAST  3.914     3.043 -0.427  -0.427   -0.039   -0.039
+153        DOING ~~  REMIND  5.614     4.365 -0.229  -0.229   -0.025   -0.025
+154        DOING ~~    GRAB  1.890     1.469  0.120   0.120    0.013    0.013
+155        DOING ~~    KEEP  5.074     3.945  0.402   0.402    0.041    0.041
+156          HOW ~~ SUCCEED  1.892     1.471 -0.275  -0.275   -0.026   -0.026
+157          HOW ~~    PAST  0.390     0.303 -0.133  -0.133   -0.012   -0.012
+158          HOW ~~  REMIND  0.118     0.092 -0.033  -0.033   -0.004   -0.004
+159          HOW ~~    GRAB  0.021     0.016  0.012   0.012    0.001    0.001
+160          HOW ~~    KEEP  0.090     0.070  0.053   0.053    0.005    0.005
+161      SUCCEED ~~    PAST  0.184     0.143  0.118   0.118    0.010    0.010
+162      SUCCEED ~~  REMIND  0.379     0.295  0.080   0.080    0.008    0.008
+163      SUCCEED ~~    GRAB  8.348     6.491 -0.337  -0.337   -0.036   -0.036
+164      SUCCEED ~~    KEEP  9.427     7.330  0.740   0.740    0.071    0.071
+165         PAST ~~  REMIND 10.393     8.081  0.559   0.559    0.058    0.058
+166         PAST ~~    GRAB  0.262     0.204 -0.079  -0.079   -0.009   -0.009
+167         PAST ~~    KEEP  0.218     0.170 -0.150  -0.150   -0.015   -0.015
+168       REMIND ~~    GRAB 42.006    32.661  2.817   2.817    0.357    0.357
+169       REMIND ~~    KEEP  4.280     3.328 -0.400  -0.400   -0.045   -0.045
+170         GRAB ~~    KEEP  3.277     2.548 -0.349  -0.349   -0.041   -0.041
+       intensity  imageryi imageryse availability     total
+alpha  0.9484531 0.9021656 0.8910544    0.8654295 0.9468947
+omega  0.9488781 0.9083551 0.8980147    0.8780797 0.9666324
+omega2 0.9488781 0.9083551 0.8980147    0.8780797 0.9666324
+omega3 0.9491309 0.9086670 0.9011413    0.8849104 0.9131399
+avevar 0.8609306 0.7699789 0.6914757    0.7095625 0.7497202
+
+
+sink('C:/TEMP/SMALoutput.txt',append=TRUE)
+SMAL.model4a <- 'intensity =~ WANT + NEED + URGE
+               imageryi =~ GOOD + BETTER + WORSE 
+               imageryse =~ DOING + HOW + SUCCEED + PAST
+              availability =~ REMIND + GRAB'
+fit <- cfa(SMAL.model4a, data=SMAL, estimator="MLR") 
+summary(fit, fit.measures=TRUE, modindices=TRUE)
+reliability(fit)
+
+
+lavaan (0.5-23.1097) converged normally after  91 iterations
+
+  Number of observations                           399
+
+  Estimator                                         ML      Robust
+  Minimum Function Test Statistic              192.780     150.692
+  Degrees of freedom                                48          48
+  P-value (Chi-square)                           0.000       0.000
+  Scaling correction factor                                  1.279
+    for the Yuan-Bentler correction
+
+Model test baseline model:
+
+  Minimum Function Test Statistic             4898.165    3274.280
+  Degrees of freedom                                66          66
+  P-value                                        0.000       0.000
+
+User model versus baseline model:
+
+  Comparative Fit Index (CFI)                    0.970       0.968
+  Tucker-Lewis Index (TLI)                       0.959       0.956
+
+  Robust Comparative Fit Index (CFI)                         0.973
+  Robust Tucker-Lewis Index (TLI)                            0.962
+
+Loglikelihood and Information Criteria:
+
+  Loglikelihood user model (H0)              -9832.791   -9832.791
+  Scaling correction factor                                  1.330
+    for the MLR correction
+  Loglikelihood unrestricted model (H1)      -9736.401   -9736.401
+  Scaling correction factor                                  1.303
+    for the MLR correction
+
+  Number of free parameters                         42          42
+  Akaike (AIC)                               19749.582   19749.582
+  Bayesian (BIC)                             19917.119   19917.119
+  Sample-size adjusted Bayesian (BIC)        19783.850   19783.850
+
+Root Mean Square Error of Approximation:
+
+  RMSEA                                          0.087       0.073
+  90 Percent Confidence Interval          0.074  0.100       0.062  0.085
+  P-value RMSEA <= 0.05                          0.000       0.001
+
+  Robust RMSEA                                               0.083
+  90 Percent Confidence Interval                             0.068  0.098
+
+Standardized Root Mean Square Residual:
+
+  SRMR                                           0.043       0.043
+
+Parameter Estimates:
+
+  Information                                 Observed
+  Standard Errors                   Robust.huber.white
+
+Latent Variables:
+                   Estimate  Std.Err  z-value  P(>|z|)
+  intensity =~                                        
+    WANT              1.000                           
+    NEED              1.018    0.029   35.234    0.000
+    URGE              0.961    0.026   37.374    0.000
+  imageryi =~                                         
+    GOOD              1.000                           
+    BETTER            1.011    0.025   41.223    0.000
+    WORSE             0.779    0.042   18.487    0.000
+  imageryse =~                                        
+    DOING             1.000                           
+    HOW               0.980    0.020   49.609    0.000
+    SUCCEED           0.934    0.033   28.485    0.000
+    PAST              0.696    0.050   13.975    0.000
+  availability =~                                     
+    REMIND            1.000                           
+    GRAB              1.032    0.041   25.274    0.000
+
+Covariances:
+                   Estimate  Std.Err  z-value  P(>|z|)
+  intensity ~~                                        
+    imageryi          6.437    0.433   14.850    0.000
+    imageryse         5.112    0.450   11.373    0.000
+    availability      5.133    0.424   12.100    0.000
+  imageryi ~~                                         
+    imageryse         7.195    0.493   14.597    0.000
+    availability      4.709    0.432   10.903    0.000
+  imageryse ~~                                        
+    availability      3.508    0.412    8.523    0.000
+
+Intercepts:
+                   Estimate  Std.Err  z-value  P(>|z|)
+   .WANT              4.241    0.147   28.753    0.000
+   .NEED              4.115    0.156   26.427    0.000
+   .URGE              3.664    0.141   26.028    0.000
+   .GOOD              5.361    0.159   33.728    0.000
+   .BETTER            5.461    0.163   33.562    0.000
+   .WORSE             4.351    0.152   28.614    0.000
+   .DOING             5.358    0.162   33.149    0.000
+   .HOW               5.654    0.159   35.598    0.000
+   .SUCCEED           5.709    0.169   33.807    0.000
+   .PAST              4.955    0.168   29.481    0.000
+   .REMIND            3.564    0.143   24.867    0.000
+   .GRAB              3.386    0.138   24.557    0.000
+    intensity         0.000                           
+    imageryi          0.000                           
+    imageryse         0.000                           
+    availability      0.000                           
+
+Variances:
+                   Estimate  Std.Err  z-value  P(>|z|)
+   .WANT              1.039    0.169    6.162    0.000
+   .NEED              1.756    0.214    8.219    0.000
+   .URGE              0.857    0.128    6.704    0.000
+   .GOOD              1.335    0.224    5.961    0.000
+   .BETTER            1.620    0.241    6.713    0.000
+   .WORSE             3.916    0.439    8.912    0.000
+   .DOING             1.431    0.246    5.822    0.000
+   .HOW               1.437    0.247    5.818    0.000
+   .SUCCEED           3.527    0.472    7.466    0.000
+   .PAST              6.916    0.587   11.777    0.000
+   .REMIND            1.380    0.253    5.456    0.000
+   .GRAB              0.323    0.205    1.581    0.114
+    intensity         7.640    0.479   15.934    0.000
+    imageryi          8.745    0.513   17.062    0.000
+    imageryse         8.994    0.527   17.051    0.000
+    availability      6.816    0.571   11.939    0.000
+
+Modification Indices:
+
+             lhs op     rhs     mi mi.scaled    epc sepc.lv sepc.all sepc.nox
+51     intensity =~    GOOD  6.414     5.014 -0.152  -0.421   -0.133   -0.133
+52     intensity =~  BETTER  0.637     0.498  0.049   0.135    0.042    0.042
+53     intensity =~   WORSE  6.638     5.189  0.179   0.493    0.162    0.162
+54     intensity =~   DOING  2.509     1.961  0.063   0.175    0.054    0.054
+55     intensity =~     HOW  8.064     6.304 -0.112  -0.310   -0.098   -0.098
+56     intensity =~ SUCCEED  0.036     0.028 -0.009  -0.026   -0.008   -0.008
+57     intensity =~    PAST 10.547     8.244  0.213   0.588    0.175    0.175
+58     intensity =~  REMIND  1.682     1.315 -0.269  -0.744   -0.260   -0.260
+59     intensity =~    GRAB  1.682     1.315  0.278   0.768    0.279    0.279
+60      imageryi =~    WANT  5.645     4.413  0.101   0.298    0.101    0.101
+61      imageryi =~    NEED  4.573     3.574 -0.102  -0.302   -0.097   -0.097
+62      imageryi =~    URGE  0.196     0.153 -0.018  -0.052   -0.019   -0.019
+63      imageryi =~   DOING  1.826     1.427 -0.081  -0.240   -0.074   -0.074
+64      imageryi =~     HOW  2.583     2.019 -0.095  -0.281   -0.088   -0.088
+65      imageryi =~ SUCCEED  1.859     1.453  0.095   0.280    0.083    0.083
+66      imageryi =~    PAST 15.855    12.393  0.358   1.058    0.315    0.315
+67      imageryi =~  REMIND  0.575     0.449  0.035   0.103    0.036    0.036
+68      imageryi =~    GRAB  0.575     0.449 -0.036  -0.106   -0.039   -0.039
+69     imageryse =~    WANT 17.519    13.694  0.125   0.374    0.127    0.127
+70     imageryse =~    NEED 12.500     9.771 -0.122  -0.365   -0.117   -0.117
+71     imageryse =~    URGE  1.109     0.867 -0.030  -0.089   -0.032   -0.032
+72     imageryse =~    GOOD 26.046    20.359  0.311   0.933    0.294    0.294
+73     imageryse =~  BETTER 16.346    12.777 -0.252  -0.754   -0.232   -0.232
+74     imageryse =~   WORSE  2.576     2.014 -0.112  -0.335   -0.110   -0.110
+75     imageryse =~  REMIND  0.023     0.018 -0.004  -0.013   -0.005   -0.005
+76     imageryse =~    GRAB  0.023     0.018  0.005   0.014    0.005    0.005
+77  availability =~    WANT  3.813     2.981 -0.076  -0.198   -0.067   -0.067
+78  availability =~    NEED 11.517     9.002  0.151   0.394    0.127    0.127
+79  availability =~    URGE  1.095     0.856 -0.038  -0.100   -0.036   -0.036
+80  availability =~    GOOD  1.822     1.424 -0.058  -0.151   -0.048   -0.048
+81  availability =~  BETTER  0.609     0.476 -0.034  -0.089   -0.028   -0.028
+82  availability =~   WORSE 11.423     8.929  0.180   0.469    0.155    0.155
+83  availability =~   DOING  0.648     0.507  0.028   0.074    0.023    0.023
+84  availability =~     HOW  2.547     1.991 -0.056  -0.145   -0.046   -0.046
+85  availability =~ SUCCEED  2.808     2.195 -0.076  -0.197   -0.059   -0.059
+86  availability =~    PAST 23.536    18.397  0.288   0.753    0.224    0.224
+87          WANT ~~    NEED  1.008     0.788 -0.146  -0.146   -0.016   -0.016
+88          WANT ~~    URGE  0.239     0.187  0.073   0.073    0.009    0.009
+89          WANT ~~    GOOD  4.984     3.896  0.204   0.204    0.022    0.022
+90          WANT ~~  BETTER  5.140     4.017 -0.218  -0.218   -0.023   -0.023
+91          WANT ~~   WORSE  1.263     0.987 -0.143  -0.143   -0.016   -0.016
+92          WANT ~~   DOING  3.071     2.400  0.162   0.162    0.017    0.017
+93          WANT ~~     HOW  2.473     1.933  0.144   0.144    0.015    0.015
+94          WANT ~~ SUCCEED  2.972     2.323 -0.214  -0.214   -0.022   -0.022
+95          WANT ~~    PAST  1.872     1.463  0.226   0.226    0.023    0.023
+96          WANT ~~  REMIND  2.042     1.596 -0.116  -0.116   -0.014   -0.014
+97          WANT ~~    GRAB  0.042     0.033  0.015   0.015    0.002    0.002
+98          NEED ~~    URGE  0.314     0.245  0.079   0.079    0.009    0.009
+99          NEED ~~    GOOD 15.353    12.001 -0.425  -0.425   -0.043   -0.043
+100         NEED ~~  BETTER  4.893     3.825  0.252   0.252    0.025    0.025
+101         NEED ~~   WORSE 10.796     8.439  0.501   0.501    0.053    0.053
+102         NEED ~~   DOING  0.366     0.286 -0.067  -0.067   -0.007   -0.007
+103         NEED ~~     HOW  0.644     0.504 -0.088  -0.088   -0.009   -0.009
+104         NEED ~~ SUCCEED  0.709     0.554 -0.125  -0.125   -0.012   -0.012
+105         NEED ~~    PAST  0.059     0.046 -0.048  -0.048   -0.005   -0.005
+106         NEED ~~  REMIND  0.801     0.626  0.086   0.086    0.010    0.010
+107         NEED ~~    GRAB  1.365     1.067  0.103   0.103    0.012    0.012
+108         URGE ~~    GOOD  0.001     0.001 -0.003  -0.003    0.000    0.000
+109         URGE ~~  BETTER  1.331     1.040  0.104   0.104    0.011    0.011
+110         URGE ~~   WORSE  0.915     0.715 -0.114  -0.114   -0.013   -0.013
+111         URGE ~~   DOING  0.252     0.197  0.043   0.043    0.005    0.005
+112         URGE ~~     HOW  5.876     4.593 -0.207  -0.207   -0.023   -0.023
+113         URGE ~~ SUCCEED  5.652     4.418  0.276   0.276    0.029    0.029
+114         URGE ~~    PAST  2.425     1.895 -0.241  -0.241   -0.025   -0.025
+115         URGE ~~  REMIND  0.013     0.010  0.009   0.009    0.001    0.001
+116         URGE ~~    GRAB  0.502     0.392 -0.050  -0.050   -0.006   -0.006
+117         GOOD ~~  BETTER  1.341     1.048  0.296   0.296    0.029    0.029
+118         GOOD ~~   WORSE 14.754    11.533 -0.682  -0.682   -0.071   -0.071
+119         GOOD ~~   DOING  1.667     1.303 -0.145  -0.145   -0.014   -0.014
+120         GOOD ~~     HOW 23.869    18.658  0.542   0.542    0.054    0.054
+121         GOOD ~~ SUCCEED  2.079     1.625 -0.213  -0.213   -0.020   -0.020
+122         GOOD ~~    PAST  1.229     0.961  0.217   0.217    0.020    0.020
+123         GOOD ~~  REMIND  0.534     0.418  0.069   0.069    0.008    0.008
+124         GOOD ~~    GRAB  0.448     0.351 -0.059  -0.059   -0.007   -0.007
+125       BETTER ~~   WORSE  8.069     6.308  0.517   0.517    0.052    0.052
+126       BETTER ~~   DOING  5.103     3.989 -0.266  -0.266   -0.025   -0.025
+127       BETTER ~~     HOW  4.970     3.885 -0.259  -0.259   -0.025   -0.025
+128       BETTER ~~ SUCCEED  9.460     7.395  0.478   0.478    0.044    0.044
+129       BETTER ~~    PAST  0.460     0.360 -0.140  -0.140   -0.013   -0.013
+130       BETTER ~~  REMIND  0.016     0.013  0.013   0.013    0.001    0.001
+131       BETTER ~~    GRAB  0.890     0.696 -0.087  -0.087   -0.010   -0.010
+132        WORSE ~~   DOING  2.245     1.755  0.231   0.231    0.024    0.024
+133        WORSE ~~     HOW 15.404    12.041 -0.599  -0.599   -0.062   -0.062
+134        WORSE ~~ SUCCEED  0.989     0.773  0.206   0.206    0.020    0.020
+135        WORSE ~~    PAST  4.357     3.406  0.576   0.576    0.057    0.057
+136        WORSE ~~  REMIND  0.282     0.220  0.071   0.071    0.008    0.008
+137        WORSE ~~    GRAB  0.939     0.734  0.117   0.117    0.014    0.014
+138        DOING ~~     HOW 11.457     8.956  0.776   0.776    0.076    0.076
+139        DOING ~~ SUCCEED  0.032     0.025 -0.037  -0.037   -0.003   -0.003
+140        DOING ~~    PAST  3.839     3.001 -0.423  -0.423   -0.039   -0.039
+141        DOING ~~  REMIND  4.781     3.737 -0.210  -0.210   -0.023   -0.023
+142        DOING ~~    GRAB  4.268     3.336  0.182   0.182    0.021    0.021
+143          HOW ~~ SUCCEED  1.948     1.523 -0.278  -0.278   -0.026   -0.026
+144          HOW ~~    PAST  0.369     0.288 -0.129  -0.129   -0.012   -0.012
+145          HOW ~~  REMIND  0.124     0.097 -0.034  -0.034   -0.004   -0.004
+146          HOW ~~    GRAB  0.102     0.080  0.028   0.028    0.003    0.003
+147      SUCCEED ~~    PAST  0.187     0.146  0.119   0.119    0.010    0.010
+148      SUCCEED ~~  REMIND  0.977     0.764  0.128   0.128    0.013    0.013
+149      SUCCEED ~~    GRAB  4.905     3.834 -0.262  -0.262   -0.028   -0.028
+150         PAST ~~  REMIND 10.075     7.875  0.548   0.548    0.057    0.057
+151         PAST ~~    GRAB  0.522     0.408 -0.114  -0.114   -0.012   -0.012
+       intensity  imageryi imageryse availability     total
+alpha  0.9484531 0.9021656 0.8910544    0.9427113 0.9434102
+omega  0.9488738 0.9083404 0.8980055    0.9429479 0.9694407
+omega2 0.9488738 0.9083404 0.8980055    0.9429479 0.9694407
+omega3 0.9491209 0.9086119 0.9010957    0.9429478 0.9520556
+avevar 0.8609197 0.7699523 0.6914601    0.8920784 0.7780355
